@@ -76,6 +76,49 @@ class Nestify extends Eloquent {
 	}
 
 	/**
+	 * Nest the current node on the supplied node.
+	 * 
+	 * @param  object|int  $node
+	 * @return object
+	 */
+	public function nest($node)
+	{
+		$node = $this->check($node);
+
+		if(!$node->exists)
+		{
+			throw new Exception('The node you are nesting on has not been saved yet.');
+		}
+
+		// If our node currently exists we need to fake its death, shifting it outside of the
+		// tree momenterily.
+		if($this->exists)
+		{
+			$this->fake();
+
+			// Refresh the node we are placing it after so we can get the latest right value.
+			$node->refresh();
+
+			// And now revive the bastard to the parent nodes right value.
+			$this->revive($node->rgt);
+		}
+
+		// If the node doesn't exist yet we need set the left and right values. The new node will
+		// always be placed at the end of any other children.
+		else
+		{
+			$this->lft = $node->rgt;
+			
+			$this->rgt = $this->lft + 1;
+
+			// We need to make an adjustment to the tree so we can fit out brand new node in.
+			// Once done we'll save our new node.
+			$this->adjustment($this->lft)
+				 ->save();
+		}
+	}
+
+	/**
 	 * Refreshes the node by getting the latest left and right values from the database.
 	 * 
 	 * @return object
