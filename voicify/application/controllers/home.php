@@ -7,7 +7,10 @@ class Home_Controller extends Base_Controller {
 	 */
 	public function get_index()
 	{
-		$this->layout->content = 'Hello World';
+		// Determine what we will show on the homepage.
+		$categories = Repository\Category::overview();
+
+		$this->layout->nest('content', 'overview', compact('categories'));
 	}
 
 	/**
@@ -58,7 +61,7 @@ class Home_Controller extends Base_Controller {
 	public function get_join()
 	{
 		$this->layout->with('title', 'Join')
-					 ->nest('content', 'theme: register');
+					 ->nest('content', 'register');
 	}
 
 	/**

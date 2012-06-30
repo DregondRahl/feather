@@ -41,6 +41,7 @@ a:hover {
 }
 
 .body {
+	border-top: 2px solid #eaeaea;
 	background-color: #fff;
 	overflow: hidden;
 	padding: 15px;
@@ -67,16 +68,43 @@ a:hover {
 	text-transform: uppercase;
 	font-size: 28px;
 	font-weight: normal;
-	margin: 0;
+	margin: 0 0 40px;
 }
 
 .header a:hover { text-decoration: none; }
 
-.header:after {
-	content: "";
+/* Main Menu */
+.menu {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu > li {
+	float: left;
+	margin: 0 3px 0 0;
+	font-size: 13px;
+}
+
+.menu > li > a {
+	position: relative;
 	display: block;
-	margin: 40px 0 0;
-	border-top: 2px solid #eaeaea;
+	padding: 8px 16px;
+	background-color: #f0f0f0;
+	color: #666;
+	bottom: -2px;
+}
+
+.menu > li > a:hover {
+	text-decoration: none;
+	background-color: #eaeaea;
+}
+
+.menu > li > a.selected {
+	padding-top: 10px;
+	background-color: #fff;
+	color: #e24f43;
+	font-weight: bold;
 }
 
 /* Categories Menu */
@@ -243,6 +271,9 @@ ul.discussions > li.category h2 {
 	margin: 0 0 12px;
 }
 
+ul.discussions > li.category h2 a { color: #494949; }
+ul.discussions > li.category h2 a:hover { text-decoration: none; }
+
 /* More from Category */
 ul.discussions > li.more {
 	text-align: center;
@@ -265,7 +296,7 @@ ul.discussions > li.category > ul.children {
 ul.discussions > li.category > ul.children > li {
 	display: inline-block;
 	font-size: 11px;
-	color: #888888;
+	color: #777;
 	margin: 0 12px 0 0;
 }
 
@@ -277,10 +308,10 @@ ul.discussions > li.category > ul.children > li:before {
 }
 
 ul.discussions > li.category > ul.children > li a {
-	color: #888888;
+	color: #777;
 }
 
-ul.discussions > li.category > ul.children > li a:hover { color: #666; }
+ul.discussions > li.category > ul.children > li a:hover { color: #444; }
 
 /* Category for the discussion */
 ul.discussions > li.discussion > .category {
@@ -296,7 +327,7 @@ ul.discussions > li.discussion > .meta {
 }
 
 ul.discussions > li.discussion > .meta > .title {
-	font-size: 14px;
+	font-size: 15px;
 }
 
 ul.discussions > li.discussion > .meta > .title:after {
@@ -307,12 +338,12 @@ ul.discussions > li.discussion > .meta > .title:after {
 ul.discussions > li.discussion > .meta > p {
 	display: inline-block;
 	font-size: 11px;
-	color: #888;
+	color: #777;
 	margin: 0 12px 0 0;
 }
 
 ul.discussions > li.discussion > .meta > p a {
-	color: #666;
+	color: #444;
 }
 
 ul.discussions > li.discussion > .meta > span + a {
@@ -334,10 +365,6 @@ ul.discussions > li.discussion > .stats > div {
 	padding: 2px 0 5px;
 	word-spacing: normal;
 	letter-spacing: normal;
-}
-
-ul.discussions > li.discussion > .stats > div:hover {
-	background-color: #f1f1f1;
 }
 
 ul.discussions > li.discussion > .stats > div > span {
@@ -425,7 +452,7 @@ ul.discussions > li.discussion > .stats > div > span.number {
 
 /* Soft Button */
 .btn.soft {
-	color: #a4a4a4;
+	color: #989898;
 	padding: 2px 5px 3px;
 	border-color: #e4e4e4;
 	box-shadow: 0 1px 1px #f1f1f1;
@@ -435,7 +462,7 @@ ul.discussions > li.discussion > .stats > div > span.number {
 
 .btn.soft:hover,
 .btn.soft:focus {
-	color: #888;
+	color: #777;
 	border-color: #d7d7d7;
 }
 
@@ -505,7 +532,7 @@ ul.discussions > li.discussion > .stats > div > span.number {
 
 /* User menu */
 .user {
-	background-color: #f1f1f1;
+	background-color: #f6f6f6;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -580,7 +607,7 @@ h4 {
 	font-size: 11px;
 	color: #888;
 	overflow: hidden;
-	padding: 16px 0 0;
+	padding: 16px 0;
 }
 
 .footer p {
@@ -737,7 +764,6 @@ fieldset ol li input[type=checkbox] {
 /* Form submit */
 fieldset ol li input[type=submit] {
 	cursor: pointer;
-	font-weight: bold;
 	margin: 10px 0 0;;
 }
 
@@ -769,22 +795,31 @@ fieldset ol li .error textarea {
 /* Fixed message */
 .fixed-message {
 	position: fixed;
-	width: 600px;
-	left: 50%;
+	width: 100%;
+	left: 0;
 	top: 0;
-	background-color: #000;
-	background: rgba(0, 0, 0, 0.8);
-	color: #fff;
-	text-shadow: 0 1px 1px #000;
-	padding: 5px 10px;
-	-moz-border-radius: 0 0 3px 3px;
-	-webkit-border-radius: 0 0 3px 3px;
-	border-radius: 0 0 3px 3px;
-	margin-left: -300px;
 	text-align: center;
+	line-height: 32px;
+	border-bottom: 1px solid #111;
+	background: #313131;
+	background: -moz-linear-gradient(top,  #313131 0%, #1e1e1e 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#313131), color-stop(100%,#1e1e1e));
+	background: -webkit-linear-gradient(top,  #313131 0%,#1e1e1e 100%);
+	background: -o-linear-gradient(top,  #313131 0%,#1e1e1e 100%);
+	background: -ms-linear-gradient(top,  #313131 0%,#1e1e1e 100%);
+	background: linear-gradient(top,  #313131 0%,#1e1e1e 100%);
+	box-shadow: 0 1px 1px #bbb;
+	color: #ebebeb;
+	padding: 5px 12px 6px !important;
+	text-shadow: 0 1px 0 #222;
+	z-index: 10;
 }
 
-.fixed-message a { color: #f1bdab; }
+.fixed-message a { font-weight: bold; color: #f7f7f7; }
+
+.fixed-message + .container {
+	padding-top: 40px;
+}
 
 /* Labels */
 .label {
@@ -813,7 +848,7 @@ fieldset ol li .error textarea {
 }
 
 .label.label-inverse {
-	background-color: #333;
+	background-color: #777;
 }
 
 /* Alerts */
@@ -863,9 +898,9 @@ fieldset ol li .error textarea {
 	display: none;
 	max-width: 700px;
 	max-height: 500px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	background-color: #fff;
 	box-shadow: 0 0 6px #222;
 }
@@ -877,9 +912,9 @@ fieldset ol li .error textarea {
 #box-modal #box-content h2 {
 	margin: -25px -25px 25px;
 	padding: 25px 25px 28px;
-	-moz-border-radius: 4px 4px 0 0;
-	-webkit-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-	background-color: #e1e1e1;
-	border-bottom: 1px solid #d5d5d5;
+	-moz-border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	border-radius: 6px 6px 0 0;
+	background-color: #f9f9f9;
+	border-bottom: 1px solid #f1f1f1;
 }

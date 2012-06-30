@@ -10,7 +10,7 @@ class Flux extends Driver {
 	 * @param  array  $credentials
 	 * @return bool|object
 	 */
-	public function passes($credentials)
+	public function login($credentials)
 	{
 		$old = $this->old()->where_username($credentials['username'])->first();
 

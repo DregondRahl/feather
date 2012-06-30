@@ -1,6 +1,9 @@
 <?php namespace Repository;
 
-use Eloquent, Hash, Str, Config as C;
+use Str;
+use Hash;
+use Eloquent;
+use Config as C;
 
 class User extends Eloquent {
 
@@ -55,4 +58,15 @@ class User extends Eloquent {
 	{
 		$this->set_attribute('password', Hash::make($password));
 	}
+
+	/**
+	 * Getter for a users slug.
+	 * 
+	 * @return string
+	 */
+	public function get_slug()
+	{
+		return Str::slug($this->get_attribute('username'));
+	}
+
 }

@@ -28,8 +28,8 @@
 				</li>
 				
 				<li>
-					{{ Form::submit('Sign In', array('class' => 'btn blue')) }}&nbsp;&nbsp;
-					{{ HTML::link_to_route('register', 'No account? Join our community!', array(), array('class' => 'btn light font-bold')) }}
+					{{ Form::submit('Sign In', array('class' => 'btn blue large')) }}&nbsp;&nbsp;
+					{{ HTML::link_to_route('register', 'No account? Join our community!', array(), array('class' => 'btn light large')) }}
 				</li>
 
 			</ol>
@@ -42,7 +42,7 @@
 	<div class="form-right authorization-links">
 		<h4 class="font-bold">Or connect with an existing service.</h4>
 
-		@include('theme: partial.authorization')
+		@include('partial.authorization')
 	</div>
 
 </div>

@@ -1,11 +1,7 @@
-<h3>Hello!</h3>
+<h3>Hello there!</h3>
 
 <p>
-	Welcome to our community.
-</p>
-
-<p>
-	We encourage all new visitors to join and take part in the discussions.
+	Welcome! We encourage all new visitors to join and take part in the discussions.
 </p>
 
 {{ HTML::link_to_route('login', 'Sign In', null, array('class' => 'signin btn light')) }}

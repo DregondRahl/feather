@@ -38,9 +38,9 @@ class Bouncer extends Driver {
 		{
 			$driver = Migration\Drivers\Driver::attach($migration);
 
-			$migrated = $driver->user()->where_username($credentials['username'])->first();
+			$user = User::where_username($credentials['username'])->first();
 
-			if($migrated->roles()->only('roles.id') == 4 and ($old = $driver->login($credentials)))
+			if($user->roles()->only('roles.id') == 4 and ($old = $driver->login($credentials)))
 			{
 				// Replace the hashed password in the old system object with the now correct unhashed password
 				// so that it can be rehashed for Feather.

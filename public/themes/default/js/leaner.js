@@ -44,6 +44,12 @@
                             close();
                         });
 
+                        $(document).one('keydown', function(e) {
+                            if(e.keyCode == 27) {
+                                close();
+                            }
+                        });
+
                         var overlay = $('#lean-overlay');
 
                         overlay.css({ 'display' : 'block', opacity : 0 });

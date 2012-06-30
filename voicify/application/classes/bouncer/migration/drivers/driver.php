@@ -2,7 +2,6 @@
 
 use DB;
 use Config;
-use Repository\User;
 
 abstract class Driver {
 
@@ -151,16 +150,6 @@ abstract class Driver {
 	public function old()
 	{
 		return $this->connection;
-	}
-
-	/**
-	 * Return a new user repository.
-	 * 
-	 * @return object
-	 */
-	public function user()
-	{
-		return new User;
 	}
 
 	/**
