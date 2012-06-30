@@ -1,0 +1,75 @@
+/**
+ * Tipme Styles
+ * ---------------------------------------
+ * Most of the container styles can be changed to alter colors etc.
+ * You might also like to alter the #tipme-content to change some font colors
+ * and padding.
+ *
+ * Copyright 2011 Jason Lewis
+ * http://jasonlewis.me/projects/tipme
+ */
+#tipme-container {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	line-height: normal !important;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	background-color: #222;
+	background: rgba(0, 0, 0, 0.95);
+	z-index: 99; /* change this to something higher if you please */
+}
+
+#tipme-container #tipme-wrapper {
+	position: relative;
+}
+
+#tipme-container #tipme-arrow {
+	position: absolute;
+	border-width: 5px;
+	border-style: solid;
+}
+
+#tipme-container.arrow-b #tipme-arrow {
+	top: -10px;
+	left: 50%;
+	margin-left: -5px;
+	border-color: transparent transparent #222 transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.95) transparent;
+}
+
+#tipme-container.arrow-t #tipme-arrow {
+	bottom: -10px;
+	left: 50%;
+	margin-left: -5px;
+	border-color: #222 transparent transparent transparent;
+	border-color: rgba(0, 0, 0, 0.95) transparent transparent transparent;
+}
+
+#tipme-container.arrow-l #tipme-arrow {
+	top: 50%;
+	right: -10px;
+	margin-top: -5px;
+	border-color: transparent transparent transparent #222;
+	border-color: transparent transparent transparent rgba(0, 0, 0, 0.95);
+}
+
+#tipme-container.arrow-r #tipme-arrow {
+	top: 50%;
+	left: -10px;
+	margin-top: -5px;
+	border-color: transparent #222 transparent transparent;
+	border-color: transparent rgba(0, 0, 0, 0.95) transparent transparent;
+}
+
+#tipme-container #tipme-content {
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+	padding: 6px 10px;
+	font-size: 11px;
+}
