@@ -193,7 +193,7 @@ ul.discussions {
 }
 
 ul.discussions > li.discussion,
-ul.discussions > li.heading {
+ul.discussions > li.category {
 	display: block;
 	padding: 12px 0;
 	border-top: 1px solid #EAEAEA;
@@ -202,12 +202,12 @@ ul.discussions > li.heading {
 }
 
 ul.discussions > li.discussion:last-child,
-ul.discussions > li.heading:last-child {
+ul.discussions > li.category:last-child {
 	border-bottom: 1px solid #EAEAEA;
 }
 
 ul.discussions > li.discussion:first-child,
-ul.discussions > li.heading:first-child {
+ul.discussions > li.category:first-child {
 	border-top: 0;
 }
 
@@ -227,39 +227,66 @@ ul.discussions > li.discussion > div {
 }
 
 /* Category Heading */
-ul.discussions > li.heading {
+ul.discussions > li.category {
+	position: relative;
 	letter-spacing: normal;
 	word-spacing: normal;
 	padding: 12px 0 0;
 	border-top: 0;
 }
 
-ul.discussions > li.heading:first-child {
+ul.discussions > li.category:first-child {
 	padding: 0;
 }
 
-/* Channel for the discussion */
-ul.discussions > li.discussion > .channel {
+ul.discussions > li.category h2 {
+	margin: 0 0 12px;
+}
+
+/* More from Category */
+ul.discussions > li.more {
+	text-align: center;
+	padding: 12px 0 18px;
+}
+
+ul.discussions > li.more span {
+	position: relative;
+	font-size: 14px;
+	top: -1px;
+}
+
+/* Child Categories */
+ul.discussions > li.category > ul.children {
+	list-style-type: none;
+	margin: -6px 0 12px;
+	padding: 0;
+}
+
+ul.discussions > li.category > ul.children > li {
+	display: inline-block;
+	font-size: 11px;
+	color: #888888;
+	margin: 0 12px 0 0;
+}
+
+ul.discussions > li.category > ul.children > li:before {
+	content: "·";
+	display: inline-block;
+	font-weight: bold;
+	margin: 0 3px 0 0;
+}
+
+ul.discussions > li.category > ul.children > li a {
+	color: #888888;
+}
+
+ul.discussions > li.category > ul.children > li a:hover { color: #666; }
+
+/* Category for the discussion */
+ul.discussions > li.discussion > .category {
 	width: 21%;
 	text-align: right;
-}
-
-ul.discussions > li.discussion > .channel a {
-	display: inline-block;
-	color: #a4a4a4;
-	padding: 2px 5px 3px;
-	border: 1px solid #e4e4e4;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
 	font-size: 11px;
-	box-shadow: 0 1px 1px #f1f1f1;
-}
-
-ul.discussions > li.discussion > .channel a:hover {
-	color: #888;
-	text-decoration: none;
-	border-color: #d7d7d7;
 }
 
 /* Discussion Details */
@@ -302,11 +329,15 @@ ul.discussions > li.discussion > .stats {
 
 ul.discussions > li.discussion > .stats > div {
 	width: 50%;
-	background-color: #f1f1f1;
+	background-color: #f6f6f6;
 	display: inline-block;
 	padding: 2px 0 5px;
 	word-spacing: normal;
 	letter-spacing: normal;
+}
+
+ul.discussions > li.discussion > .stats > div:hover {
+	background-color: #f1f1f1;
 }
 
 ul.discussions > li.discussion > .stats > div > span {
@@ -390,6 +421,26 @@ ul.discussions > li.discussion > .stats > div > span.number {
 	background: -o-linear-gradient(top,  #dadada 0%,#efefef 100%);
 	background: -ms-linear-gradient(top,  #dadada 0%,#efefef 100%);
 	background: linear-gradient(top,  #dadada 0%,#efefef 100%);
+}
+
+/* Soft Button */
+.btn.soft {
+	color: #a4a4a4;
+	padding: 2px 5px 3px;
+	border-color: #e4e4e4;
+	box-shadow: 0 1px 1px #f1f1f1;
+	background: #fff;
+	text-shadow: none;
+}
+
+.btn.soft:hover,
+.btn.soft:focus {
+	color: #888;
+	border-color: #d7d7d7;
+}
+
+.btn.soft:active {
+	border-color: #f1f1f1;
 }
 
 /* Blue Button */
@@ -743,7 +794,7 @@ fieldset ol li .error textarea {
     color: #FFFFFF;
     font-size: 10px;
     line-height: 14px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     vertical-align: middle;
     white-space: nowrap;
     text-transform: uppercase;
@@ -762,7 +813,7 @@ fieldset ol li .error textarea {
 }
 
 .label.label-inverse {
-	background-color: #444;
+	background-color: #333;
 }
 
 /* Alerts */
