@@ -190,6 +190,21 @@ class Nestify extends Eloquent {
 		return $this;
 	}
 
+	/**
+	 * Deletes a node and any children of that node unless the node has abandoned its children.
+	 * 
+	 * <code>
+	 * 		$node = Nestify::find(3);
+	 * 
+	 * 		// Delete the node including it's children if it has any.
+	 * 		$node->delete();
+	 * 
+	 * 		// To save the children abandon them before deleting.
+	 * 		$node->abandon()->delete();
+	 * </code>
+	 * 
+	 * @return object
+	 */
 	public function delete()
 	{
 		if($this->exists)
