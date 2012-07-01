@@ -11,7 +11,24 @@
 class Nestify extends Eloquent {
 
 	/**
+	 * If we are currently deleting a node.
+	 * 
+	 * @var bool
+	 */
+	protected $deleting = false;
+
+	/**
 	 * Place a node after another node in the tree.
+	 * 
+	 * <code>
+	 * 		$node = Nestify::find(4);
+	 * 
+	 * 		// Place the node after the node with an ID of 2.
+	 * 		$node->after(2);
+	 * 
+	 * 		// Place the node after another Nestify object.
+	 * 		$node->after(Nestify::find(2));
+	 * </code>
 	 * 
 	 * @param  object|int  $node
 	 * @return object
@@ -23,6 +40,16 @@ class Nestify extends Eloquent {
 
 	/**
 	 * Place a node before another node in the tree.
+	 * 
+	 * <code>
+	 * 		$node = Nestify::find(4);
+	 * 
+	 * 		// Place the node before the node with an ID of 2.
+	 * 		$node->before(2);
+	 * 
+	 * 		// Place the node before another Nestify object.
+	 * 		$node->before(Nestify::find(2));
+	 * </code>
 	 * 
 	 * @param  object|int  $node
 	 * @return object
@@ -78,6 +105,16 @@ class Nestify extends Eloquent {
 	/**
 	 * Nest the current node on the supplied node.
 	 * 
+	 * <code>
+	 * 		$node = Nestify::find(3);
+	 * 
+	 * 		// Nest the node on node with an ID of 5.
+	 * 		$node->nest(5);
+	 * 
+	 * 		// Nest the node on another Nestify object.
+	 * 		$node->nest(Nestify::find(5));
+	 * </code>
+	 * 
 	 * @param  object|int  $node
 	 * @return object
 	 */
@@ -108,7 +145,7 @@ class Nestify extends Eloquent {
 		else
 		{
 			$this->lft = $node->rgt;
-			
+
 			$this->rgt = $this->lft + 1;
 
 			// We need to make an adjustment to the tree so we can fit out brand new node in.
@@ -116,6 +153,82 @@ class Nestify extends Eloquent {
 			$this->adjustment($this->lft)
 				 ->save();
 		}
+	}
+
+	/**
+	 * Parent node abandons children nodes, they become orphans of the next parent.
+	 * 
+	 * <code>
+	 * 		$parent = Nestify::find(4);
+	 * 
+	 * 		// Abandon the children making them orphans to the parents parent.
+	 * 		$parent->abandon();
+	 * 
+	 *		// Abandon the children then move the node to another position.
+	 * 		$parent->abandon()->before(2);
+	 * </code>
+	 * 
+	 * @return object
+	 */
+	public function abandon()
+	{
+		if(!$this->parent())
+		{
+			throw new Exception('Could not abandon children because the node is not a parent.');
+		}
+
+		// Shift all the children of the node forward one position.
+		static::where('lft', 'BETWEEN', DB::raw(($this->lft + 1) . ' AND ' . ($this->rgt - 1)))->update(array(
+			'lft' => DB::raw('lft + 1'),
+			'rgt' => DB::raw('rgt + 1')
+		));
+
+		$this->rgt = $this->lft + 1;
+
+		$this->save();
+
+		return $this;
+	}
+
+	public function delete()
+	{
+		if($this->exists)
+		{
+			// If we are deleting then we'll allow Eloquent to take care of the rest.
+			if($this->deleting)
+			{
+				parent::delete();
+
+				$this->deleting = false;
+			}
+
+			// If not deleting yet we'll need to check what it is we are actually deleting.
+			else
+			{
+				$this->deleting = true;
+
+				// If the node is a parent then we are going to delete all the children along with it.
+				// To delete a node without its children be sure to abandon the children before deleting.
+				if($this->parent())
+				{
+					static::where('lft', 'BETWEEN', DB::raw($this->lft . ' AND ' . $this->rgt))->delete();
+				}
+
+				// If it's not a parent node then just delete the node, simple really!
+				else
+				{
+					$this->deleting = false;
+
+					// Allow Eloquent to delete the actual node.
+					parent::delete();
+				}
+
+				// Now to re-adjust the tree removing the gap we have left.
+				$this->adjustment($this->lft, ($this->width() + 1) * -1);
+			}
+		}
+
+		return $this;
 	}
 
 	/**
@@ -203,11 +316,28 @@ class Nestify extends Eloquent {
 	}
 
 	/**
+	 * A node is a parent when its width is greater than one.
+	 * 
+	 * <code>
+	 * 		if($node->parent())
+	 * 		{
+	 * 			// The node is a parent.
+	 * 		}
+	 * </code>
+	 * 
+	 * @return bool
+	 */
+	public function parent()
+	{
+		return $this->width() > 1;
+	}
+
+	/**
 	 * Returns the width of the node in the tree.
 	 * 
 	 * @return int
 	 */
-	protected function width()
+	public function width()
 	{
 		return $this->rgt - $this->lft;
 	}
