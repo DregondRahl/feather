@@ -26,12 +26,12 @@ $environments = array();
 // --------------------------------------------------------------
 // The path to the application directory.
 // --------------------------------------------------------------
-$paths['app'] = '../voicify/application';
+$paths['app'] = '../feather/application';
 
 // --------------------------------------------------------------
 // The path to the Laravel directory.
 // --------------------------------------------------------------
-$paths['sys'] = '../voicify/laravel';
+$paths['sys'] = '../feather/laravel';
 
 // --------------------------------------------------------------
 // The path to the config directory.
@@ -41,12 +41,12 @@ $paths['config'] = '../config';
 // --------------------------------------------------------------
 // The path to the bundles directory.
 // --------------------------------------------------------------
-$paths['bundle'] = '../voicify/bundles';
+$paths['bundle'] = '../feather/bundles';
 
 // --------------------------------------------------------------
 // The path to the storage directory.
 // --------------------------------------------------------------
-$paths['storage'] = '../voicify/storage';
+$paths['storage'] = '../feather/storage';
 
 // --------------------------------------------------------------
 // The path to the public directory.

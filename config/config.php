@@ -10,7 +10,7 @@
  */
 return array(
 	'host'	   => 'localhost',
-	'database' => 'voicify',
+	'database' => 'feather',
 	'username' => 'root',
 	'password' => '',
 	'prefix'   => '',

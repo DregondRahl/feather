@@ -138,6 +138,9 @@ class Nestify extends Eloquent {
 
 			// And now revive the bastard to the parent nodes right value.
 			$this->revive($node->rgt);
+
+			// Refresh our node.
+			$this->refresh();
 		}
 
 		// If the node doesn't exist yet we need set the left and right values. The new node will
@@ -244,6 +247,22 @@ class Nestify extends Eloquent {
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Return an array of crumbs that led to the current node.
+	 * 
+	 * <code>
+	 * 		$node = Nestify::find(3);
+	 * 
+	 * 		$crumbs = $node->crumbs();
+	 * </code>
+	 * 
+	 * @return array
+	 */
+	public function crumbs()
+	{
+		return static::where('lft', '<', $this->lft)->where('rgt', '>', $this->rgt)->order_by('lft', 'asc')->get();
 	}
 
 	/**
@@ -371,6 +390,37 @@ class Nestify extends Eloquent {
 		}
 
 		return $node;
+	}
+
+	/**
+	 * Overload the Eloquent save method so we can set the left and right values of a node if they aren't
+	 * set by one of the other methods.
+	 * 
+	 * @return bool
+	 */
+	public function save()
+	{
+		if(!$this->exists and is_null($this->lft))
+		{
+			// If this is the first node in the tree then it gets the left and right values of 1 and 2.
+			if(!$after = static::select(array('lft', 'rgt'))->order_by('lft', 'desc')->take(1)->first())
+			{
+				$this->fill(array(
+					'lft' => 1,
+					'rgt' => 2
+				));
+			}
+			else
+			{
+				$this->fill(array(
+					'lft' => $after->rgt + 1,
+					'rgt' => $after->rgt + 2
+				));
+			}
+
+		}
+
+		return parent::save();
 	}
 
 }
