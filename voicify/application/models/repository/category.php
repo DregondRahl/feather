@@ -1,12 +1,13 @@
 <?php namespace Repository;
 
+use DB;
 use Str;
 use URI;
-use Eloquent;
+use Nestify;
 use Architect;
 use Config as C;
 
-class Category extends Eloquent {
+class Category extends Nestify {
 
 	public static $table = 'category';
 	public static $timestamps = false;
@@ -99,16 +100,6 @@ class Category extends Eloquent {
 		}
 
 		return $categories;
-	}
-
-	public function after($node)
-	{
-		if(!$node instanceof Repository\Category)
-		{
-			$node = static::find($node);
-		}
-
-		dd($node);
 	}
 
 }
