@@ -1,4 +1,4 @@
-<h3>G'day {{ $users->online->username }}!</h3>
+<h3>G'day {{ $app->users->online->username }}!</h3>
 
 <p>
 	You have new messages!

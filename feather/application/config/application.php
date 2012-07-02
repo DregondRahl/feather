@@ -143,6 +143,7 @@ return array(
 		'Asset'      => 'Laravel\\Asset',
 		'Autoloader' => 'Laravel\\Autoloader',
 		'Blade'      => 'Laravel\\Blade',
+		'Bouncer'	 => 'Bouncer\\Bouncer',
 		'Bundle'     => 'Laravel\\Bundle',
 		'Cache'      => 'Laravel\\Cache',
 		'Controller' => 'Laravel\\Routing\\Controller',

@@ -1,4 +1,4 @@
-<h2>Join {{ $app['title'] }}</h2>
+<h2>Join {{ $app->title }}</h2>
 
 {{ Form::errors($errors) }}
 
@@ -60,10 +60,10 @@
 
 		 			</div>
 
-		 			{{ HTML::script('http://www.google.com/recaptcha/api/challenge?k=' . Config::get('voicify.registration.recaptcha_public_key')) }}
+		 			{{ HTML::script('http://www.google.com/recaptcha/api/challenge?k=' . Config::get('feather.registration.recaptcha_public_key')) }}
 				</li>
 
-				@if(Config::get('voicify.registration.rules', 0))
+				@if(Config::get('feather.registration.rules', 0))
 
 				<li>
 					{{ Form::checkbox('rules', 1, Input::had('rules'), array('id' => 'rules', 'tabindex' => 2)) }}

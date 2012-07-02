@@ -86,9 +86,9 @@ class Date {
 	public function format($format)
 	{
 		$formats = array(
-			'long'  => Config::get('voicify.datetime.long_date'),
-			'short' => Config::get('voicify.datetime.short_date'),
-			'time'  => Config::get('voicify.datetime.time_only')
+			'long'  => Config::get('feather.datetime.long_date'),
+			'short' => Config::get('feather.datetime.short_date'),
+			'time'  => Config::get('feather.datetime.time_only')
 		);
 
 		if(array_key_exists($format, $formats))

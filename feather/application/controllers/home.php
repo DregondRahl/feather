@@ -16,7 +16,7 @@ class Home_Controller extends Base_Controller {
 	/**
 	 * Show the sign in form.
 	 */
-	public function get_signin()
+	public function get_login()
 	{
 		$this->layout->with('title', 'Sign In')
 					 ->nest('content', 'login');
@@ -26,11 +26,11 @@ class Home_Controller extends Base_Controller {
 	 * Handle a user sign in attempt.
 	 * 
 	 */
-	public function post_signin()
+	public function post_login()
 	{
-		if(Service\Validation\Login::passes(Input::all()))
+		if(Validation\Login::passes(Input::all()))
 		{
-			if(Service\Security::authorize(array('username' => Input::get('username'), 'password' => Input::get('password'))))
+			if(Bouncer::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))
 			{
 				return Redirect::home();
 			}
@@ -42,15 +42,15 @@ class Home_Controller extends Base_Controller {
 			}
 		}
 
-		return Redirect::to_route('login')->with_input()->with_errors(Service\Validation::errors());
+		return Redirect::to_route('login')->with_input()->with_errors(Validation::errors());
 	}
 
 	/**
 	 * Handle the logout of a user.
 	 */
-	public function get_signout()
+	public function get_logout()
 	{
-		Service\Security::logout();
+		Bouncer::logout();
 
 		return Redirect::home();
 	}

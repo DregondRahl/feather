@@ -163,11 +163,11 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 | Define a few extra useful paths for Velvet.
 |
 */
-set_path('theme', path('public') . 'themes/' . Config::get('voicify.application.theme', 'default') . '/');
+set_path('theme', path('public') . 'themes/' . Config::get('feather.application.theme', 'default') . '/');
 
 /*
 |--------------------------------------------------------------------------
-| Voicify Configuration
+| Feather Configuration
 |--------------------------------------------------------------------------
 |
 | Update some configurations such as the database connection prior to
@@ -185,12 +185,12 @@ Config::database() and Config::bundles();
 |--------------------------------------------------------------------------
 |
 | Register the Bouncer authentication package which is used to authorize
-| users within Voicify.
+| users within Feather.
 |
 */
 Auth::extend('bouncer', function()
 {
-	return new Bouncer\Bouncer;
+	return new Bouncer\Driver;
 });
 
 /*
@@ -198,7 +198,7 @@ Auth::extend('bouncer', function()
 | Startup
 |--------------------------------------------------------------------------
 |
-| Load in the required start files to begin Voicify.
+| Load in the required start files to begin Feather.
 |
 */
 require __DIR__ . DS . 'start' . DS . 'events' . EXT;

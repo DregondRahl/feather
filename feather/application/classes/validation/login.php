@@ -1,6 +1,6 @@
-<?php namespace Service\Validation;
+<?php namespace Validation;
 
-use Service\Validation as Validation_Service;
+use Validation as Validation_Service;
 
 class Login extends Validation_Service {
 

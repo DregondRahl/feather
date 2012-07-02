@@ -12,7 +12,7 @@ class Config extends Laravel\Config {
 	{
 		Cache::forget('config');
 
-		return static::$items['application']['voicify'] = Cache::sear('config', function()
+		return static::$items['application']['feather'] = Cache::sear('config', function()
 		{
 			$config = array();
 

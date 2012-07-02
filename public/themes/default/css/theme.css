@@ -36,8 +36,9 @@ a:hover {
 }
 
 .container {
-	max-width: 92%;
+	max-width: 1240px;
 	margin: 40px auto 0;
+	padding: 0 25px;
 }
 
 .body {
@@ -47,12 +48,12 @@ a:hover {
 	padding: 15px;
 }
 
-.left {
+.body > .left {
 	float: left;
 	width: 23%;
 }
 
-.right {
+.body > .right {
 	float: left;
 	margin: 0 0 0 2%;
 	width: 75%;
@@ -64,11 +65,18 @@ a:hover {
 
 /* Header text */
 .header {
+	margin: 0 0 40px;
+	line-height: 35px;
+}
+
+.header h1 {
+	float: left;
 	font-family: 'Ubuntu', sans-serif;
 	text-transform: uppercase;
 	font-size: 28px;
 	font-weight: normal;
-	margin: 0 0 40px;
+	line-height: normal;
+	margin: 0;
 }
 
 .header a:hover { text-decoration: none; }
@@ -78,13 +86,17 @@ a:hover {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	clear: both;
 }
 
 .menu > li {
 	float: left;
-	margin: 0 3px 0 0;
+	margin: 0 0 0 3px;
 	font-size: 13px;
 }
+
+.menu > li.right { float: right; }
+.menu > li:first-child { margin-left: 0; }
 
 .menu > li > a {
 	position: relative;
@@ -105,6 +117,53 @@ a:hover {
 	background-color: #fff;
 	color: #e24f43;
 	font-weight: bold;
+}
+
+/* Search Box */
+.search {
+	position: relative;
+	float: right;
+}
+
+.search input[type=text] {
+	padding: 0 30px 0 11px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	background-color: #fff;
+	border: 1px solid #e3e3e3;
+	font-size: 14px;
+	height: 32px;
+	width: 300px;
+}
+
+.search input[type=text]::-webkit-input-placeholder {
+	color: #bbb;
+	font-style: italic;
+}
+
+.search input[type=text]:-moz-placeholder {
+	color: #bbb;
+	font-style: italic;
+}
+
+.search input[type=submit] {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	border: 0;
+	width: 32px;
+	height: 32px;
+	background: url('../img/sprites.png') no-repeat -96px -32px;
+}
+
+.search input[type=submit]:hover,
+.search input[type=text]:hover + input[type=submit],
+.search input[type=text]:focus + input[type=submit] {
+	background-position: -96px -64px;
 }
 
 /* Categories Menu */
@@ -779,7 +838,7 @@ input[type="reset"]::-moz-focus-inner {
 /* Form errors */
 fieldset ol li .error input,
 fieldset ol li .error textarea {
-	border-color: #F1C1C1;
+	border-color: #fab1b1;
 }
 
 .alert ol {
@@ -866,7 +925,7 @@ fieldset ol li .error textarea {
 
 .alert.alert-error {
     background-color: #FCE9E9;
-    border-color: #F1C1C1;
+    border-color: #fab1b1;
     color: #B94A48;
 }
 

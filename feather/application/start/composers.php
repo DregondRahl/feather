@@ -1,12 +1,12 @@
 <?php
 
-View::share('app', Config::get('voicify.forum'));
-
 $users = array();
 
-if(Service\Security::online())
+if(Bouncer::online())
 {
-	$users['online'] = Service\Security::user();
+	$users['online'] = Bouncer::user();
 }
 
-View::share('users', (object) $users);
+View::share('app', (object) array_merge(Config::get('feather.forum'), array('users' => (object) $users)));
+
+unset($users);

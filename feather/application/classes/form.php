@@ -17,7 +17,7 @@ class Form extends Laravel\Form {
 	{
 		static::$errors = $errors;
 
-		return count($errors->all()) == 0 ? null : view('theme: error.form', compact($errors));
+		return count($errors->all()) == 0 ? null : view('error.form', compact($errors));
 	}
 
 	/**

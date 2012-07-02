@@ -1,28 +1,32 @@
-<?php namespace Service;
-
-use Input, Validator, Exception;
+<?php
 
 abstract class Validation {
 
 	/**
-	 * An array of rules to validate the form data against. These rules are generally different
-	 * to those that validate the data prior to repository interaction.
+	 * An array of rules to validate the form data against.
+	 * 
+	 * @var array
 	 */
 	protected static $rules = array();
 
 	/**
-	 * An array of corrosponding error messages. This array will be reformated prior to
-	 * validation to make it more legible.
+	 * An array of corrosponding error messages.
+	 * 
+	 * @var array
 	 */
 	protected static $messages = array();
 
 	/**
 	 * An array of input to be validated.
+	 * 
+	 * @var array
 	 */
 	protected static $input = array();
 
 	/**
 	 * The Validator object once validation has either passes or failed.
+	 * 
+	 * @var object
 	 */
 	public static $validator;
 

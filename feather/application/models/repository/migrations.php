@@ -4,6 +4,11 @@ use Eloquent;
 
 class Migrations extends Eloquent {
 
+	/**
+	 * The table name.
+	 * 
+	 * @var string
+	 */
 	public static $table = 'migrations';
 
 	/**

@@ -7,7 +7,18 @@ use Config as C;
 
 class User extends Eloquent {
 
+	/**
+	 * The table name.
+	 * 
+	 * @var string
+	 */
 	public static $table = 'users';
+
+	/**
+	 * Timestamps are enabled.
+	 * 
+	 * @var bool
+	 */
 	public static $timestamps = true;
 
 	/**

@@ -9,7 +9,18 @@ use Config as C;
 
 class Category extends Nestify {
 
+	/**
+	 * The table name.
+	 * 
+	 * @var string
+	 */
 	public static $table = 'category';
+
+	/**
+	 * Timestamps are disabled.
+	 * 
+	 * @var bool
+	 */
 	public static $timestamps = false;
 
 	/**

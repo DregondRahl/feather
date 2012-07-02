@@ -20,11 +20,11 @@
 	<div class="stats">
 		<div class="views">
 			<span class="title">Views</span>
-			<span class="number">{{ $discussion->views }}</span>
+			<span class="number" title="{{ $discussion->views }} views">{{ $discussion->short_views }}</span>
 		</div>
 		<div class="replies">
 			<span class="title">Replies</span>
-			<span class="number">{{ $discussion->replies }}</span>
+			<span class="number" title="{{ $discussion->replies }} replies">{{ $discussion->short_replies }}</span>
 		</div>
 	</div>
 </li>

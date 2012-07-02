@@ -1,75 +1,54 @@
 <?php namespace Bouncer;
 
-use Laravel\Auth\Drivers\Driver;
-use Repository\Migrations;
-use Repository\User;
-use Hash;
+use Auth;
+use Config;
 
-/**
- * Bouncer is the authentication package for Feather.
- */
-class Bouncer extends Driver {
+class Bouncer extends Auth {
 
-	/**
-	 * Get the current user of Feather.
-	 * 
-	 * @param  int  $id
-	 * @return object|null
-	 */
-	public function retrieve($id)
+	public static function is($role)
 	{
-		if(!is_null($id))
+		$roles = Config::get('bouncer.permissions');
+
+		if(!array_key_exists($role, $roles))
 		{
-			return User::find($id);
+			return false;
 		}
+
+		$ids = $roles[$role];
+
+		foreach(static::user()->roles as $role)
+		{
+			if(in_array($role->id, $ids))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
-	 * Attempt to log a user in and if need be migrate them from an older system.
+	 * Checks if the user is online and returns the user object.
 	 * 
-	 * @param  array  $credentials
-	 * @return bool|object
+	 * @return object
 	 */
-	public function attempt($credentials = array())
+	public static function online()
 	{
-		// Bouncer needs to check for forum migrations. If there is an active forum migration we'll
-		// hand off to the migration quickly to see if this user was part of the old system.
-		if($migration = Migrations::active())
+		return Auth::check();
+	}
+
+	/**
+	 * Checks if the user is online and is activated.
+	 * 
+	 * @return bool
+	 */
+	public static function activated()
+	{
+		if($user = static::user())
 		{
-			$driver = Migration\Drivers\Driver::attach($migration);
-
-			$user = User::where_username($credentials['username'])->first();
-
-			if($user->roles()->only('roles.id') == 4 and ($old = $driver->login($credentials)))
-			{
-				// Replace the hashed password in the old system object with the now correct unhashed password
-				// so that it can be rehashed for Feather.
-				$old = (object) array_merge((array) $old, array('password' => $credentials['password']));
-
-				// Log all failed migrations so that they can be reviewed later by an administrator.
-				if(!$user = $driver->migrate_user($old, $driver->user()->where_username($credentials['username'])->first()))
-				{
-					// TODO: The actual logging part.
-					dd('Failed to migrate user.');
-
-					return false;
-				}
-
-				// We can now continue on to the normal login process below. Thankyou for migrating with Bouncer.
-			}
+			return ($user->activated == 1);
 		}
-		else
-		{
-			extract($credentials);
 
-			// If Bouncer is unable to find the user then we can assume that they have entered the wrong username
-			// or if the password hash fails then they entered the wrong password.
-			if((!$user = User::where_username($username)->first()) or !Hash::check($password, $user->password))
-			{
-				return false;
-			}
-		}
-		
-		return $this->login($user->id, array_get($credentials, 'remember'));
+		return false;
 	}
 }

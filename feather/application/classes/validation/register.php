@@ -1,6 +1,7 @@
-<?php namespace Service\Validation;
+<?php namespace Validation;
 
-use Service\Validation as Validation_Service, Config;
+use Config;
+use Validation as Validation_Service;
 
 class Register extends Validation_Service {
 

@@ -36,3 +36,11 @@ dwsync.xml
 .CVS
 .idea
 components
+
+# Feather
+feather/storage/sessions/*
+feather/storage/cache/*
+feather/storage/database/*
+feather/storage/views/*
+feather/storage/logs/*
+feather/storage/work/*
